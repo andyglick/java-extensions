@@ -1,6 +1,9 @@
 # Gradle caches, etc
 **/.gradle
 
+# Maven
+target/
+
 # IntelliJ IDEA project files
 **/*.ipr
 **/*.iws

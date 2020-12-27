@@ -13,6 +13,8 @@ import static org.junit.Assert.*;
 
 public class AdrToolsImporterTests {
 
+    private static final String TEST_FILES_DIRECTORY = "target/test-classes/adrs";
+
     private Workspace workspace;
     private SoftwareSystem softwareSystem;
     private Documentation documentation;
@@ -66,7 +68,7 @@ public class AdrToolsImporterTests {
 
     @Test
     public void test_importArchitectureDecisionRecords() throws Exception {
-        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File("test/unit/adrs"));
+        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File(TEST_FILES_DIRECTORY));
         importer.importArchitectureDecisionRecords();
 
         assertEquals(10, documentation.getDecisions().size());
@@ -103,7 +105,7 @@ public class AdrToolsImporterTests {
 
     @Test
     public void test_importArchitectureDecisionRecords_RewritesLinksBetweenADRsWhenTheyAreNotAssociatedWithAnElement() throws Exception {
-        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File("test/unit/adrs"));
+        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File(TEST_FILES_DIRECTORY));
         importer.importArchitectureDecisionRecords();
 
         Decision decision5 = documentation.getDecisions().stream().filter(d -> d.getId().equals("5")).findFirst().get();
@@ -112,7 +114,7 @@ public class AdrToolsImporterTests {
 
     @Test
     public void test_importArchitectureDecisionRecords_RewritesLinksBetweenADRsWhenTheyAreAssociatedWithAnElement() throws Exception {
-        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File("test/unit/adrs"));
+        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File(TEST_FILES_DIRECTORY));
         importer.importArchitectureDecisionRecords(softwareSystem);
 
         Decision decision5 = documentation.getDecisions().stream().filter(d -> d.getId().equals("5")).findFirst().get();
@@ -121,7 +123,7 @@ public class AdrToolsImporterTests {
 
     @Test
     public void test_importArchitectureDecisionRecords_SupportsTheIncorrectSpellingOfSuperseded() throws Exception {
-        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File("test/unit/adrs"));
+        AdrToolsImporter importer = new AdrToolsImporter(workspace, new File(TEST_FILES_DIRECTORY));
         importer.importArchitectureDecisionRecords();
 
         Decision decision4 = documentation.getDecisions().stream().filter(d -> d.getId().equals("4")).findFirst().get();
